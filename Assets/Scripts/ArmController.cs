@@ -30,8 +30,8 @@ public class ArmController : MonoBehaviour
 
         // Comprobar que no se pasen de ángulo autorizado
         Debug.Log(Mathf.DeltaAngle(baseTransform.eulerAngles.x, x + angleOffsetX));
-        bool canX = Mathf.Abs(Mathf.DeltaAngle(baseTransform.eulerAngles.x, x + angleOffsetX)) < maxAngleX;
-        bool canY = Mathf.Abs(Mathf.DeltaAngle(baseTransform.eulerAngles.y, y + angleOffsetY)) < maxAngleY;
+        bool canX = Mathf.Abs(Mathf.DeltaAngle(baseTransform.eulerAngles.x, x - angleOffsetX)) < maxAngleX;
+        bool canY = Mathf.Abs(Mathf.DeltaAngle(baseTransform.eulerAngles.y, y - angleOffsetY)) < maxAngleY;
 
         // Rotar
         transform.rotation = Quaternion.Euler(
