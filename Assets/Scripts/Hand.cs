@@ -10,7 +10,7 @@ public class Hand : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown(interactButton))
+        if (buffer != null && Input.GetButtonDown(interactButton))
             buffer.Interact(this);
     }
 
@@ -23,7 +23,8 @@ public class Hand : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (!free) return;
+        if (!free && !buffer.Exit(this))
+            return;
         Interactable interactable = other.GetComponent<Interactable>();
         if (interactable == null) return;
         buffer = null;
