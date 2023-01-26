@@ -11,6 +11,7 @@ public class MoveController : MonoBehaviour
 
     [SerializeField] private float speed = 3f, runSpeed = 7f;
     [SerializeField] private string runButtonName;
+    [SerializeField] private Transform height, maxHeight, minHeight;
 
     private void Awake()
     {
@@ -25,6 +26,14 @@ public class MoveController : MonoBehaviour
         movement = cam.TransformDirection(movement);
         movement.y = 0f;
         
+        if (Input.GetButtonDown("Crawl"))
+        {
+            height.position = minHeight.position;
+        }else if (Input.GetButtonUp("Crawl"))
+        {
+            height.position = maxHeight.position;
+        }
+
         characterController.Move(movement.normalized * (Input.GetButton(runButtonName) ? runSpeed : speed) * Time.deltaTime);
     }
 }

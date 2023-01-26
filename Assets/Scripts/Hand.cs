@@ -18,6 +18,7 @@ public class Hand : MonoBehaviour
     {
         if (!free && buffer.gameObject != other.gameObject) return;
         Interactable interactable= other.GetComponent<Interactable>();
+        Debug.Log(other.name);
         if (interactable == null) return;
         buffer = interactable;
     }
