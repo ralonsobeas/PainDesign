@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Main.unity
+    guid: 57da1b8250987934aa85132639d3f6a2
+  - enabled: 1
+    path: Assets/Scenes/Macaescena.unity
+    guid: 232aafe047ee70849b024a073cbc2d09
   m_configObjects: {}

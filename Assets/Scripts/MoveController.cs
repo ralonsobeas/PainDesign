@@ -15,6 +15,8 @@ public class MoveController : MonoBehaviour
 
     private void Awake()
     {
+        Cursor.visible = false;
+        Cursor.lockState= CursorLockMode.Locked;
         characterController = GetComponent<CharacterController>();
         cam = Camera.main.transform;
     }

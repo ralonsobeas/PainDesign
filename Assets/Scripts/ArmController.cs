@@ -29,7 +29,7 @@ public class ArmController : MonoBehaviour
         float y = transform.rotation.eulerAngles.y + Input.GetAxis("Mouse X");
 
         // Comprobar que no se pasen de ángulo autorizado
-        Debug.Log(Mathf.DeltaAngle(baseTransform.eulerAngles.x, x + angleOffsetX));
+        //Debug.Log(Mathf.DeltaAngle(baseTransform.eulerAngles.x, x + angleOffsetX));
         bool canX = Mathf.Abs(Mathf.DeltaAngle(baseTransform.eulerAngles.x, x - angleOffsetX)) < maxAngleX;
         bool canY = Mathf.Abs(Mathf.DeltaAngle(baseTransform.eulerAngles.y, y - angleOffsetY)) < maxAngleY;
 
