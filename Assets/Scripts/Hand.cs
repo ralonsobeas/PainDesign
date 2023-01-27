@@ -5,18 +5,23 @@ using UnityEngine;
 public class Hand : MonoBehaviour
 {
     private Interactable buffer;
+    private Interactable cached;
     [SerializeField] private string interactButton;
-    private bool free = true;
 
     private void Update()
     {
-        if (buffer != null && Input.GetButtonDown(interactButton))
-            buffer.Interact(this);
+        if (!Input.GetButtonDown(interactButton)) return;
+
+        if (cached != null)
+        {
+            if (!cached.Interact(this)) cached = null;
+        }
+        else if (buffer != null && buffer.Interact(this)) cached = buffer;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!free && buffer.gameObject != other.gameObject) return;
+        if (cached != null) return;
         Interactable interactable= other.GetComponent<Interactable>();
         Debug.Log(other.name);
         if (interactable == null) return;
@@ -24,10 +29,9 @@ public class Hand : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (!free && !buffer.Exit(this))
-            return;
         Interactable interactable = other.GetComponent<Interactable>();
         if (interactable == null) return;
-        buffer = null;
+        if (buffer == interactable) buffer = null;
+        if (cached == interactable && interactable.Exit(this)) cached = null;
     }
 }

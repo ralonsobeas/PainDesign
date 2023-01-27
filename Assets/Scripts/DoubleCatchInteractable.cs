@@ -24,12 +24,13 @@ public class DoubleCatchInteractable : Interactable
         transform.rotation = Quaternion.Euler(rotationVector);
     }
 
-    public override void Interact(Hand hand)
+    public override bool Interact(Hand hand)
     {
         if (target1 == null)
         {
             target1 = hand.transform;
             rotationVector = transform.rotation.eulerAngles;
+            return true;
         }
         else if (target2 == null && hand.transform != target1)
         {
@@ -41,6 +42,7 @@ public class DoubleCatchInteractable : Interactable
                 rb.isKinematic = true;
                 _collider.isTrigger = true;
             }
+            return true;
         }
         else
         {
@@ -54,13 +56,15 @@ public class DoubleCatchInteractable : Interactable
                 rb.isKinematic = false;
                 _collider.isTrigger = false;
             }
+            return false;
         }
     }
 
     public override bool Exit(Hand hand)
     {
-        if (hand.transform == target1) target1 = null;
-        else if (hand.transform == target2) target2 = null;
-        return true;
+        bool ok = target1 == null || target2 == null;
+        if (ok && hand.transform == target1) target1 = null;
+        else if (ok && hand.transform == target2) target2 = null;
+        return ok;
     }
 }

@@ -25,7 +25,7 @@ public class CatchInteractable : Interactable
         transform.rotation = Quaternion.Euler(rotationVector);
     }
 
-    public override void Interact(Hand hand)
+    public override bool Interact(Hand hand)
     {
         if (target == null)
         {
@@ -37,6 +37,7 @@ public class CatchInteractable : Interactable
                 rb.isKinematic = true;
                 collider.isTrigger = true;
             }
+            return true;
         }
         else if (hand.transform == target)
         {
@@ -46,7 +47,9 @@ public class CatchInteractable : Interactable
                 rb.isKinematic = false;
                 collider.isTrigger = false;
             }
+            return false;
         }
+        return false;
     }
 
     public override bool Exit(Hand hand)
